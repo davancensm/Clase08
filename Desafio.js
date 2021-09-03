@@ -41,6 +41,9 @@ const server = app.listen(puerto, () => {
 
 server.on("error", error => console.log(`Error en servidor ${error}`));
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 app.get('/api/productos/listar', (req,res)=>{
     console.log('request a get recibido!');
     if(productos.length > 0){
@@ -64,12 +67,11 @@ app.get('/api/productos/listar/:id', (req,res) => {
 
 app.post('/api/productos/guardar', (req,res) => {
 	console.log('request a post recibido!')
-	let cuerpo = req.body;
+	const cuerpo = req.body;
 	let productoAAgregar = {
-		cuerpo,
+		...cuerpo,
 		"id" : productos.length + 1
 	}
-
-	console.log(productoAAgregar);
-	productos.push(productoAAgregar);
+	productos.push(productoAAgregar)
+	res.json(productoAAgregar);
 })
