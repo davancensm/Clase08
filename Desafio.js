@@ -28,12 +28,13 @@ let nuevoProducto = {
 }
 
 import express from 'express';
+import ruta from './components/routes.js'
 import fs from 'fs';
 
 const app = express();
 const puerto = 8080;
-let visitasSitio1 = 0;
-let visitasSitio2 = 0;
+
+const routes = ruta();
 
 const server = app.listen(puerto, () => {
     console.log(`Servidor inicializado en el ${server.address().port}`);
@@ -44,34 +45,8 @@ server.on("error", error => console.log(`Error en servidor ${error}`));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.get('/api/productos/listar', (req,res)=>{
-    console.log('request a get recibido!');
-    if(productos.length > 0){
-        res.json(productos);  
-    } else {
-        res.json({error : 'no hay productos cargados'})
-    }
-    
-})
+app.get(routes.listar,routes.funcionListar)
 
-app.get('/api/productos/listar/:id', (req,res) => {
-    console.log('request a get recibido!');
-    let params = req.params;
-    if(Object.entries(params).length > 0 && params.id >= 1 && params.id <= productos.length){
-        let result = productos.find(x => x.id === params.id)
-        res.json(result);
-    }else{
-        res.json({error : 'producto no encontrado'})
-    }
-});
+app.get(routes.listarPorId,routes.funcionListarPorId);
 
-app.post('/api/productos/guardar', (req,res) => {
-	console.log('request a post recibido!')
-	const cuerpo = req.body;
-	let productoAAgregar = {
-		...cuerpo,
-		"id" : productos.length + 1
-	}
-	productos.push(productoAAgregar)
-	res.json(productoAAgregar);
-})
+app.post(routes.guardar, routes.funcionGuardar);
