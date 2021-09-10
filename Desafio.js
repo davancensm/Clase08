@@ -50,3 +50,7 @@ app.get(routes.listar,routes.funcionListar)
 app.get(routes.listarPorId,routes.funcionListarPorId);
 
 app.post(routes.guardar, routes.funcionGuardar);
+
+app.put(routes.actualizar,routes.funcionActualizar);
+
+app.delete(routes.borrar,routes.funcionBorrar);
