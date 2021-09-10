@@ -24,11 +24,11 @@ const producto = [];
 
 class rutas {
     constructor() {
-        this.listar = '/api/productos/listar',
-        this.listarPorId = '/api/productos/listar/:id',
-        this.guardar = '/api/productos/guardar'
-        this.actualizar = '/api/productos/actualizar/:id'
-        this.borrar = '/api/productos/borrar/:id'
+        this.listar = '/productos/listar',
+        this.listarPorId = '/productos/listar/:id',
+        this.guardar = '/productos/guardar'
+        this.actualizar = '/productos/actualizar/:id'
+        this.borrar = '/productos/borrar/:id'
     }
     funcionListar = (req,res) => {
         console.log('request a get recibido!');
@@ -54,6 +54,7 @@ class rutas {
     funcionGuardar = (req,res) => {
         console.log('request a post recibido!')
         const cuerpo = req.body;
+        console.log(cuerpo)
         let productoAAgregar = {
             ...cuerpo,
             "id" : productos.length + 1

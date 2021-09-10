@@ -27,12 +27,19 @@ let nuevoProducto = {
     "thumbnail" : "https://tiendup.cdn.appdomain.cloud/business/48/products/p7Gomp_5d6833726c945_large.png",
 }
 
-import express from 'express';
+import express, { Router } from 'express';
 import ruta from './components/routes.js'
-import fs from 'fs';
 
 const app = express();
 const puerto = 8080;
+const api = express.Router();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use(express.static('public'));
+
+app.use('/api', api)
 
 const routes = ruta();
 
@@ -42,15 +49,12 @@ const server = app.listen(puerto, () => {
 
 server.on("error", error => console.log(`Error en servidor ${error}`));
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+api.get(routes.listar,routes.funcionListar)
 
-app.get(routes.listar,routes.funcionListar)
+api.get(routes.listarPorId,routes.funcionListarPorId);
 
-app.get(routes.listarPorId,routes.funcionListarPorId);
+api.post(routes.guardar, routes.funcionGuardar);
 
-app.post(routes.guardar, routes.funcionGuardar);
+api.put(routes.actualizar,routes.funcionActualizar);
 
-app.put(routes.actualizar,routes.funcionActualizar);
-
-app.delete(routes.borrar,routes.funcionBorrar);
+api.delete(routes.borrar,routes.funcionBorrar);
