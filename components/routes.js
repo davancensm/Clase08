@@ -29,6 +29,7 @@ class rutas {
         this.guardar = '/productos/guardar'
         this.actualizar = '/productos/actualizar/:id'
         this.borrar = '/productos/borrar/:id'
+        this.ides = productos.length + 1
     }
     funcionListar = (req,res) => {
         console.log('request a get recibido!');
@@ -57,8 +58,9 @@ class rutas {
         console.log(cuerpo)
         let productoAAgregar = {
             ...cuerpo,
-            "id" : productos.length + 1
+            "id" : this.ides
         }
+        this.ides++;
         productos.push(productoAAgregar)
         res.json(productoAAgregar);
     }
@@ -76,10 +78,9 @@ class rutas {
     funcionBorrar = (req,res) => {
         console.log('request de delete recibida')
         let params = parseInt(req.params.id)
-        if(productos.find(x => x.id = params)){
-            let result = productos.find(x => x.id = params)
-            console.log(result)
-            productos.splice(result.id - 1,1);
+        let id = productos.find(x => x.id === params);
+        if(id){
+            productos.splice(id.id - 1,1);
             res.json(productos)
         } else{
             res.send('No existe el producto');
