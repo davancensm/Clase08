@@ -28,11 +28,13 @@ let nuevoProducto = {
 }
 
 import express, { Router } from 'express';
-import ruta from './components/routes.js'
+import ruta from './components/routes.js';
+import handlebars from 'express-handlebars';
 
 const app = express();
 const puerto = 8080;
 const api = express.Router();
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -49,9 +51,24 @@ const server = app.listen(puerto, () => {
 
 server.on("error", error => console.log(`Error en servidor ${error}`));
 
+app.engine(
+    "hbs",
+    handlebars({
+        extname: ".hbs",
+        defaultLayout: "index.hbs",
+        layoutsDir: "./views/layouts",
+        partialsDir: "./views/partials"
+    })
+);
+
+app.set('views', './views');
+app.set('view engine', 'hbs');
+
 api.get(routes.listar,routes.funcionListar)
 
 api.get(routes.listarPorId,routes.funcionListarPorId);
+
+api.get(routes.vista,routes.funcionVista)
 
 api.post(routes.guardar, routes.funcionGuardar);
 

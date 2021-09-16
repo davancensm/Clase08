@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mi página estática</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
+    <div class="contenedor">
+    <h1 class="titulo">Ingrese Producto</h1>
  
-    <h1>Bienvenidos a mi página estática</h1>
- 
-    <form method="post" action="/api/productos/guardar" style="margin:20px;">
+    <form method="post" action="/api/productos/guardar"  style="margin:20px;">
         <fieldset>
-            <legend>Datos del producto</legend>
-            titulo:<input name="title" type="text">
-            precio:<input name="price" type="number">
-            foto:<input name="thumbnail" type="text">
+            Nombre:<input name="title" type="text" required>
+            Precio:<input name="price" type="number" required>
+            Foto:<input name="thumbnail" type="text" required>
         </fieldset>    
-        <input type="submit" value="Grabar Producto">
+        <input type="submit" onclick="setTimeout(function () { window.location.reload(); }, 3)" value="Grabar Producto">
     </form>
+</div>
 
 
 </body>

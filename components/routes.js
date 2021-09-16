@@ -2,25 +2,24 @@ let productos = [
 	{
 		"title": "Escuadra",
 		"price": "123.45",
-		"thumbnail": "https://rfmayorista.com.ar/wp-content/uploads/2020/03/REGLA-ECONM_15-CM..jpg",
+		"thumbnail": "https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/rulertriangle-128.png",
 		"id": 1
 	},
 	{
 		"title": "Calculadora",
 		"price": "234.56",
-		"thumbnail": "https://www.soscomputacion.com.ar/10024/calculadora-electronica-st39221-12-digitos-grandes-display-grande.jpg",
+		"thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/calculator-math-tool-school-128.png",
 		"id": 2
 	},
 	{
 		"title": "Globo Terráqueo",
 		"price": "345.67",
-		"thumbnail": "https://m.media-amazon.com/images/I/91JEXV3kk1L._AC_SL1500_.jpg",
+		"thumbnail": "https://cdn3.iconfinder.com/data/icons/education-209/64/globe-earth-geograhy-planet-school-128.png",
 		"id": 3
 	}
 ];
 
-const producto = [];
-
+let producto = []
 
 class rutas {
     constructor() {
@@ -29,6 +28,7 @@ class rutas {
         this.guardar = '/productos/guardar'
         this.actualizar = '/productos/actualizar/:id'
         this.borrar = '/productos/borrar/:id'
+        this.vista = '/productos/vista'
         this.ides = productos.length + 1
     }
     funcionListar = (req,res) => {
@@ -62,8 +62,8 @@ class rutas {
         }
         this.ides++;
         productos.push(productoAAgregar)
-        res.json(productoAAgregar);
     }
+    
     funcionActualizar = (req,res) => {
         console.log('request de put recibida')
         const cuerpo = req.body;
@@ -85,6 +85,10 @@ class rutas {
         } else{
             res.send('No existe el producto');
         }        
+    }
+
+    funcionVista = (req,res) => {
+        res.render('tabla', {productos : productos} )
     }
 }
 
