@@ -51,18 +51,8 @@ const server = app.listen(puerto, () => {
 
 server.on("error", error => console.log(`Error en servidor ${error}`));
 
-app.engine(
-    "hbs",
-    handlebars({
-        extname: ".hbs",
-        defaultLayout: "index.hbs",
-        layoutsDir: "./views/layouts",
-        partialsDir: "./views/partials"
-    })
-);
-
 app.set('views', './views');
-app.set('view engine', 'hbs');
+app.set('view engine', 'pug');
 
 api.get(routes.listar,routes.funcionListar)
 

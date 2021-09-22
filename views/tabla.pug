@@ -1,0 +1,24 @@
+doctype html
+html(lang='en')
+ head
+    link(rel='stylesheet', href="../../css/style.css", type='text/css' )
+    title Hello, World!
+ body
+    div.contenedor
+        h1.titulo Vista de productos
+        - if(productos)
+            table.tabla
+                tr
+                    th Title
+                    th Price
+                    th Photo  
+                    each producto in productos
+                        tr
+                            td #{producto.title}
+                            td #{producto.price}
+                            td 
+                                img(src=producto.thumbnail class='image')
+        - else 
+             div.advertencia
+                h1.advertencia No se encontraron productos
+

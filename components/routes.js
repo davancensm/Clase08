@@ -63,7 +63,7 @@ class rutas {
         this.ides++;
         productos.push(productoAAgregar)
     }
-    
+
     funcionActualizar = (req,res) => {
         console.log('request de put recibida')
         const cuerpo = req.body;
@@ -88,7 +88,7 @@ class rutas {
     }
 
     funcionVista = (req,res) => {
-        res.render('tabla', {productos : productos} )
+        res.render('tabla.pug', {productos : productos} )
     }
 }
 
