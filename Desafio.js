@@ -61,8 +61,8 @@ app.engine(
     })
 );
 
-app.set('views', './views');
-app.set('view engine', 'hbs');
+
+app.set('view engine', 'ejs');
 
 api.get(routes.listar,routes.funcionListar)
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
+</head>
+<div class="contenedor">
+    <h1 class="titulo"> Vista de productos </h1>
+    <% if (productos) { %>
+        <table class="tabla">
+            <tr>
+                <th><strong>Title</strong></th>
+                <th><strong>Price</strong></th>
+                <th><strong>Photo</strong></th>
+            </tr>
+            <% productos.forEach(function(producto) { %>
+                <tr>
+                    <td><%= producto.title %></td>
+                    <td><%= producto.price %></td>
+                    <td><img src=<%= producto.thumbnail %> class="image"></td>
+                </tr>
+            <% }) %>
+        </table>
+        <% }else{ %>
+            <div class="advertencia">
+                <h1>No se encontraron productos.</h1>
+            </div>
+        <% }%>
+</div>
+</html>

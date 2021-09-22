@@ -88,7 +88,7 @@ class rutas {
     }
 
     funcionVista = (req,res) => {
-        res.render('tabla', {productos : productos} )
+        res.render('pages/index.ejs', {productos : productos} )
     }
 }
 
